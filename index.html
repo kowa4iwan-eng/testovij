@@ -1,181 +1,318 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BOBRO Studio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOBRO Digital</title>
   <style>
-    * { box-sizing: border-box; }
-
+    * { box-sizing: border-box; scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #050816;
       color: white;
+      overflow-x: hidden;
     }
-
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, #00eaff33, transparent 30%),
+        radial-gradient(circle at 80% 10%, #7c3aed44, transparent 25%),
+        radial-gradient(circle at 60% 80%, #22c55e33, transparent 30%);
+      z-index: -2;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(#ffffff08 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+    }
     header {
-      padding: 25px 8%;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      backdrop-filter: blur(18px);
+      background: #020617aa;
+      border-bottom: 1px solid #ffffff14;
+      z-index: 10;
     }
-
     .logo {
       font-size: 26px;
-      font-weight: bold;
-      color: #38bdf8;
+      font-weight: 900;
+      letter-spacing: 1px;
     }
-
+    .logo span { color: #38bdf8; }
     nav a {
       color: white;
       text-decoration: none;
-      margin-left: 25px;
-      opacity: 0.8;
+      margin-left: 24px;
+      opacity: .8;
+      font-weight: 600;
     }
-
+    nav a:hover { color: #38bdf8; opacity: 1; }
     .hero {
-      min-height: 85vh;
-      padding: 80px 8%;
-      display: flex;
+      min-height: 100vh;
+      padding: 150px 8% 80px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
       align-items: center;
-      background:
-        radial-gradient(circle at top right, #2563eb55, transparent 35%),
-        radial-gradient(circle at bottom left, #22c55e44, transparent 35%);
     }
-
-    .hero-box {
-      max-width: 720px;
-    }
-
-    .tag {
+    .badge {
       display: inline-block;
-      padding: 8px 14px;
+      padding: 9px 16px;
       border: 1px solid #38bdf8;
       border-radius: 999px;
-      color: #38bdf8;
-      margin-bottom: 20px;
+      color: #67e8f9;
+      background: #0ea5e922;
+      margin-bottom: 25px;
     }
-
     h1 {
-      font-size: 64px;
+      font-size: clamp(44px, 7vw, 88px);
+      line-height: .95;
       margin: 0;
-      line-height: 1.05;
     }
-
     h1 span {
-      color: #22c55e;
+      background: linear-gradient(90deg, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
     }
-
-    p {
-      font-size: 21px;
+    .hero p {
+      font-size: 22px;
       line-height: 1.6;
       color: #cbd5e1;
+      max-width: 650px;
     }
-
-    .buttons {
-      margin-top: 30px;
-    }
-
+    .buttons { margin-top: 35px; }
     .btn {
       display: inline-block;
-      padding: 15px 24px;
-      border-radius: 12px;
+      padding: 16px 25px;
+      border-radius: 14px;
       text-decoration: none;
+      font-weight: 900;
       margin-right: 12px;
-      font-weight: bold;
+      transition: .25s;
     }
-
     .primary {
-      background: #22c55e;
-      color: #04130a;
+      background: linear-gradient(135deg, #22c55e, #38bdf8);
+      color: #020617;
+      box-shadow: 0 0 35px #22c55e55;
     }
-
     .secondary {
-      border: 1px solid #64748b;
       color: white;
+      border: 1px solid #64748b;
+      background: #ffffff08;
     }
-
-    .cards {
-      padding: 60px 8%;
+    .btn:hover { transform: translateY(-4px) scale(1.03); }
+    .glass {
+      background: #ffffff0d;
+      border: 1px solid #ffffff20;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 30px 80px #00000080;
+      animation: float 4s ease-in-out infinite;
+    }
+    .screen {
+      height: 420px;
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, #0f172a, #111827),
+        radial-gradient(circle, #38bdf855, transparent);
+      border: 1px solid #ffffff22;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .dots span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #64748b;
+      margin-right: 7px;
+    }
+    .big-card {
+      margin-top: 35px;
+      padding: 25px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #38bdf833, #22c55e22);
+      border: 1px solid #ffffff22;
+    }
+    .big-card h3 { font-size: 30px; margin: 0 0 10px; }
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 18px;
+      margin-top: 28px;
     }
-
-    .card {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 20px;
-      padding: 28px;
-    }
-
-    .card h3 {
-      color: #38bdf8;
-      font-size: 24px;
-    }
-
-    footer {
+    .stat {
+      background: #020617aa;
+      padding: 18px;
+      border-radius: 18px;
       text-align: center;
-      padding: 30px;
-      color: #94a3b8;
-      border-top: 1px solid #1e293b;
     }
-
-    @media (max-width: 800px) {
-      h1 { font-size: 42px; }
-      .cards { grid-template-columns: 1fr; }
-      header { flex-direction: column; gap: 15px; }
-      nav a { margin: 0 8px; }
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      color: #38bdf8;
+    }
+    section {
+      padding: 90px 8%;
+    }
+    .title {
+      font-size: 46px;
+      margin-bottom: 18px;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 20px;
+      max-width: 760px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 45px;
+    }
+    .card {
+      padding: 30px;
+      border-radius: 24px;
+      background: #0f172acc;
+      border: 1px solid #ffffff15;
+      transition: .25s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 50px #38bdf822;
+    }
+    .icon { font-size: 42px; }
+    .card h3 { font-size: 26px; }
+    .card p { color: #cbd5e1; line-height: 1.6; }
+    .cta {
+      margin: 70px 8%;
+      padding: 60px;
+      border-radius: 34px;
+      background: linear-gradient(135deg, #2563eb, #16a34a);
+      text-align: center;
+      box-shadow: 0 30px 80px #00000070;
+    }
+    .cta h2 {
+      font-size: 48px;
+      margin: 0 0 15px;
+    }
+    footer {
+      padding: 35px;
+      text-align: center;
+      color: #94a3b8;
+      border-top: 1px solid #ffffff12;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .cards, .stats { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .cta { margin: 40px 5%; padding: 35px 20px; }
+      .cta h2 { font-size: 34px; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">BOBRO Studio</div>
-    <nav>
-      <a href="#">Головна</a>
-      <a href="#">Послуги</a>
-      <a href="#">Контакти</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">BOBRO<span>Digital</span></div>
+  <nav>
+    <a href="#services">Послуги</a>
+    <a href="#about">Про нас</a>
+    <a href="#contact">Контакт</a>
+  </nav>
+</header>
 
+<main>
   <section class="hero">
-    <div class="hero-box">
-      <div class="tag">🚀 Перший сайт на GitHub</div>
-      <h1>Створюємо <span>сучасні сайти</span> для бізнесу</h1>
+    <div>
+      <div class="badge">🚀 Преміум сайт на GitHub</div>
+      <h1>Твій бізнес виглядає <span>дорого</span> в інтернеті</h1>
       <p>
-        Красивий, швидкий і адаптивний сайт, який добре виглядає на телефоні,
-        ноутбуці та телевізорі.
+        Сучасний сайт для компанії, послуг або особистого бренду.
+        Швидкий, красивий, адаптивний і готовий до розвитку.
       </p>
       <div class="buttons">
-        <a class="btn primary" href="#">Замовити сайт</a>
-        <a class="btn secondary" href="#">Подивитися роботи</a>
+        <a class="btn primary" href="#contact">Замовити сайт</a>
+        <a class="btn secondary" href="#services">Що всередині?</a>
+      </div>
+    </div>
+
+    <div class="glass">
+      <div class="screen">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="big-card">
+          <h3>Digital Platform</h3>
+          <p>Сайт, який працює на телефоні, ноутбуці та великому екрані.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>99%</strong>Швидкість</div>
+          <div class="stat"><strong>24/7</strong>Онлайн</div>
+          <div class="stat"><strong>100%</strong>Адаптив</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="cards">
-    <div class="card">
-      <h3>⚡ Швидкість</h3>
-      <p>Легкий код, швидке відкриття сторінки та хороша робота на мобільних.</p>
-    </div>
+  <section id="services">
+    <h2 class="title">Що ми робимо</h2>
+    <p class="subtitle">Не просто сторінка, а красива цифрова візитка, яка викликає довіру з першого погляду.</p>
 
-    <div class="card">
-      <h3>🎨 Дизайн</h3>
-      <p>Темний преміум-стиль, гарні кольори, великі заголовки та сучасний вигляд.</p>
-    </div>
-
-    <div class="card">
-      <h3>🔒 Безпека</h3>
-      <p>Можна тримати код приватно, а сайт публікувати на хостинг.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Преміум дизайн</h3>
+        <p>Темний сучасний стиль, красиві блоки, анімації та професійний вигляд.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Швидкість</h3>
+        <p>Легкий код без зайвого сміття. Сайт швидко відкривається навіть з телефону.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Мобільна версія</h3>
+        <p>Сайт автоматично підлаштовується під телефон, планшет, ноутбук і телевізор.</p>
+      </div>
     </div>
   </section>
 
-  <footer>
-    © 2026 BOBRO Studio. Зроблено в Україні 🇺🇦
-  </footer>
+  <section id="about">
+    <h2 class="title">Чому це круто</h2>
+    <p class="subtitle">
+      Це вже виглядає як справжній комерційний сайт: можна замінити текст,
+      додати фото, контакти, Telegram, товари або форму замовлення.
+    </p>
+  </section>
+
+  <div class="cta" id="contact">
+    <h2>Готовий запустити свій сайт?</h2>
+    <p>Напиши нам — і ми зробимо сучасну сторінку для твого бізнесу.</p>
+    <a class="btn secondary" href="mailto:info@example.com">info@example.com</a>
+  </div>
+</main>
+
+<footer>
+  © 2026 BOBRO Digital. Зроблено в Україні 🇺🇦
+</footer>
 
 </body>
 </html>
