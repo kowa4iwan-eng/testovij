@@ -1,41 +1,181 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Мій перший сайт</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BOBRO Studio</title>
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e40af);
+      background: #050816;
       color: white;
-      text-align: center;
-      padding: 80px 20px;
+    }
+
+    header {
+      padding: 25px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      opacity: 0.8;
+    }
+
+    .hero {
+      min-height: 85vh;
+      padding: 80px 8%;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at top right, #2563eb55, transparent 35%),
+        radial-gradient(circle at bottom left, #22c55e44, transparent 35%);
+    }
+
+    .hero-box {
+      max-width: 720px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #38bdf8;
+      border-radius: 999px;
+      color: #38bdf8;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 48px;
+      font-size: 64px;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    h1 span {
+      color: #22c55e;
     }
 
     p {
-      font-size: 22px;
+      font-size: 21px;
+      line-height: 1.6;
+      color: #cbd5e1;
     }
 
-    a {
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .btn {
       display: inline-block;
-      margin-top: 25px;
-      padding: 14px 25px;
-      background: #22c55e;
-      color: white;
+      padding: 15px 24px;
+      border-radius: 12px;
       text-decoration: none;
-      border-radius: 10px;
-      font-size: 20px;
+      margin-right: 12px;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: #22c55e;
+      color: #04130a;
+    }
+
+    .secondary {
+      border: 1px solid #64748b;
+      color: white;
+    }
+
+    .cards {
+      padding: 60px 8%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .card h3 {
+      color: #38bdf8;
+      font-size: 24px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #94a3b8;
+      border-top: 1px solid #1e293b;
+    }
+
+    @media (max-width: 800px) {
+      h1 { font-size: 42px; }
+      .cards { grid-template-columns: 1fr; }
+      header { flex-direction: column; gap: 15px; }
+      nav a { margin: 0 8px; }
     }
   </style>
 </head>
 <body>
-  <h1>Привіт! Це мій перший сайт</h1>
-  <p>Я зробив його на GitHub Pages 🚀</p>
-  <a href="https://github.com">Мій GitHub</a>
+
+  <header>
+    <div class="logo">BOBRO Studio</div>
+    <nav>
+      <a href="#">Головна</a>
+      <a href="#">Послуги</a>
+      <a href="#">Контакти</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-box">
+      <div class="tag">🚀 Перший сайт на GitHub</div>
+      <h1>Створюємо <span>сучасні сайти</span> для бізнесу</h1>
+      <p>
+        Красивий, швидкий і адаптивний сайт, який добре виглядає на телефоні,
+        ноутбуці та телевізорі.
+      </p>
+      <div class="buttons">
+        <a class="btn primary" href="#">Замовити сайт</a>
+        <a class="btn secondary" href="#">Подивитися роботи</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>⚡ Швидкість</h3>
+      <p>Легкий код, швидке відкриття сторінки та хороша робота на мобільних.</p>
+    </div>
+
+    <div class="card">
+      <h3>🎨 Дизайн</h3>
+      <p>Темний преміум-стиль, гарні кольори, великі заголовки та сучасний вигляд.</p>
+    </div>
+
+    <div class="card">
+      <h3>🔒 Безпека</h3>
+      <p>Можна тримати код приватно, а сайт публікувати на хостинг.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 BOBRO Studio. Зроблено в Україні 🇺🇦
+  </footer>
+
 </body>
 </html>
